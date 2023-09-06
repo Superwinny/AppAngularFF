@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { APIService } from '../service/api.service';
-import { RestoCategoryInterface } from '../data.interface';
+import { RecipeInterface, RestoCategoryInterface } from '../data.interface';
 
 @Component({
   selector: 'app-order-page',
@@ -19,6 +19,11 @@ constructor(
  async ngOnInit() {
   const recipesCategories = await this._ApiService.getRecipes();
   this.recipesCategories = recipesCategories;
+
+}
+
+actions($event: {type: string; payload: RecipeInterface}){
+    console.log($event);
 
 }
 

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { RecipeInterface } from '../data.interface';
 
 type actionType = 'add' | 'remove';
@@ -10,9 +10,13 @@ type actionType = 'add' | 'remove';
 })
 export class RecipeElementComponent {
 @Input() recipe!: RecipeInterface;
+@Output() recipeEvent: EventEmitter<{
+  type: actionType;
+  payload: RecipeInterface;
+  }> = new EventEmitter();
 
 actions(type: actionType, payload: RecipeInterface ){
-console.log({type,payload});
+this.recipeEvent.emit({type, payload})
 
 }
 

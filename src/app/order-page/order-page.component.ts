@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { APIService } from '../service/api.service';
+import { RestoCategoryInterface } from '../data.interface';
 
 @Component({
   selector: 'app-order-page',
@@ -8,17 +9,16 @@ import { APIService } from '../service/api.service';
 })
 export class OrderPageComponent implements OnInit {
 
+recipesCategories!: RestoCategoryInterface[];
+
 constructor(
-  private readonly ApiService : APIService
+  private readonly _ApiService : APIService
 ){
 
 }
  async ngOnInit() {
-
-  const data =  await  this.ApiService.getRecipes();
-
-  console.log(data);
-
+  const recipesCategories = await this._ApiService.getRecipes();
+  this.recipesCategories = recipesCategories;
 
 }
 

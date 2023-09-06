@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { OrderPageComponent } from './order-page/order-page.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RecipeElementComponent } from './recipe-element/recipe-element.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    OrderPageComponent
+    OrderPageComponent,
+    RecipeElementComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-import { RestoInterface, RecipeInterface, RestoCategoryInterface } from '../data.interface';
+import { RestoInterface,RestoCategoryInterface } from '../data.interface';
 
 
 @Injectable({

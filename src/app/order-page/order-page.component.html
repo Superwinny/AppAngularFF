@@ -1,11 +1,10 @@
 <section *ngFor="let category of recipesCategories">
   <h2>{{category.title}}</h2>
   <ul >
+
     <li *ngFor="let recipe of category.recipe">
-      <h3>{{recipe.title}}</h3>
-      <img src="{{recipe.imageUrl}}">
-      <p>{{recipe.description}}</p>
-      <p>{{recipe.price}}</p>
+       <app-recipe-element> <div recipe="recipe"></div>=""</app-recipe-element>
+
 
     </li>
   </ul>

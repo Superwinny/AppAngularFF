@@ -31,9 +31,10 @@ constructor(
 
 actions($event: {type: string; payload: RecipeInterface}){
     console.log($event);
+    this._addRecipeToForm($event.payload.uuid, 1)
 }
 
-private _addRecipeToForm(){
+private _addRecipeToForm(recipeId: string, quantity: number){
   const group = new FormGroup({
     recipeId: new FormControl("", Validators.compose([
    Validators.required

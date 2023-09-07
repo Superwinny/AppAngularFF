@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { APIService } from '../service/api.service';
 import { RecipeInterface, RestoCategoryInterface } from '../data.interface';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-order-page',
@@ -11,7 +12,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 export class OrderPageComponent implements OnInit {
 
 recipesCategories!: RestoCategoryInterface[];
-orderForm?: FormGroup;
+orderForm!: FormGroup;
 
 constructor(
   private readonly _ApiService : APIService
@@ -22,22 +23,28 @@ constructor(
   const recipesCategories = await this._ApiService.getRecipes();
   this.recipesCategories = recipesCategories;
   this.orderForm = new FormGroup({
-    recipes: new FormArray([
-      new FormGroup({
-         recipeId: new FormControl("", Validators.compose([
-        Validators.required
-      ]))
-    }),
-
-  ]),
+    recipes: new FormArray([]),
     dateTime: new FormControl()
 });
-
 
 }
 
 actions($event: {type: string; payload: RecipeInterface}){
     console.log($event);
+}
+
+private _addRecipeToForm(){
+  const group = new FormGroup({
+    recipeId: new FormControl("", Validators.compose([
+   Validators.required
+ ])),
+ quantity: new FormControl('', Validators.compose([
+   Validators.required
+ ])),
+});
+const formArray = this.orderForm?.get('recipes') as FormArray;
+formArray.push(group);
+console.log((this.orderForm.value));
 
 }
 

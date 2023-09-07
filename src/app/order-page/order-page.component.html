@@ -3,7 +3,9 @@
   <ul >
 
     <li *ngFor="let recipe of category.recipe">
-       <app-recipe-element> <div recipe="recipe" (recipeEvent)="actions($event)"></div>=""</app-recipe-element>
+       <app-recipe-element
+       [recipe]="recipe" (recipeEvent)="actions($event)">
+      </app-recipe-element>
 
 
     </li>

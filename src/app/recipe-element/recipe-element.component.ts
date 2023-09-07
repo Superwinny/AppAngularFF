@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { RecipeInterface } from '../data.interface';
 
-type actionType = 'add' | 'remove';
+type actionType = 'add'|'remove';
 
 @Component({
   selector: 'app-recipe-element',

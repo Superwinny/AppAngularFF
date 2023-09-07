@@ -30,6 +30,7 @@ constructor(
 }
 
 private _addRecipeToForm(recipeId: string, quantity: number){
+  // Build group element whith RecipeId and Quantity
   const group = new FormGroup({
     recipeId: new FormControl("", Validators.compose([
    Validators.required
@@ -38,8 +39,11 @@ private _addRecipeToForm(recipeId: string, quantity: number){
    Validators.required
  ])),
 });
+//get form Array Control to add selected recipe
 const formArray = this.orderForm?.get('recipes') as FormArray;
+//add recipe to arra form
 formArray.push(group);
+//display result in console
 console.log((this.orderForm.value));
 }
 

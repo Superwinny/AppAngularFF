@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { OrderPageComponent } from './order-page/order-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RecipeElementComponent } from './recipe-element/recipe-element.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { RecipeElementComponent } from './recipe-element/recipe-element.componen
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

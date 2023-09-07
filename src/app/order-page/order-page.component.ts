@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { APIService } from '../service/api.service';
 import { RecipeInterface, RestoCategoryInterface } from '../data.interface';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-order-page',
@@ -10,6 +11,7 @@ import { RecipeInterface, RestoCategoryInterface } from '../data.interface';
 export class OrderPageComponent implements OnInit {
 
 recipesCategories!: RestoCategoryInterface[];
+orderForm?: FormGroup;
 
 constructor(
   private readonly _ApiService : APIService
@@ -19,6 +21,18 @@ constructor(
  async ngOnInit() {
   const recipesCategories = await this._ApiService.getRecipes();
   this.recipesCategories = recipesCategories;
+  this.orderForm = new FormGroup({
+    recipes: new FormArray([
+      new FormGroup({
+         recipeId: new FormControl("", Validators.compose([
+        Validators.required
+      ]))
+    }),
+
+  ]),
+    dateTime: new FormControl()
+});
+
 
 }
 

@@ -6,7 +6,7 @@ export interface RestoInterface{
 export interface RestoCategoryInterface{
   title:string;
   uuid:string;
-  recipe: RecipeInterface[];
+  recipes: RecipeInterface[];
 }
 
 export interface RecipeInterface{

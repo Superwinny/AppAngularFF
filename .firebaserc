@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angularappff": {
+      "hosting": {
+        "AppAngularFF": [
+          "angularappff"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angularappff"
+  }
+}

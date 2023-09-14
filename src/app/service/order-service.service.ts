@@ -17,12 +17,12 @@ export class OrderServiceService {
 
   async saveData(data: {recipe: {recipeId: string; quantity: number}[], dateTime: Date}){
 
-    const docRef = doc(this._fireStore, this.databaseName + '/');
+    const docRef = doc(this._fireStore, this.databaseName + '/' + Date.now());
     await setDoc(docRef, data)
   }
-  async deleteOrder(){
+  // async deleteOrder(){
 
-    const docRef = doc(this._fireStore, this.databaseName + '/');
-    await deleteDoc(docRef)
-  }
+  //   const docRef = doc(this._fireStore, this.databaseName + '/');
+  //   await deleteDoc(docRef)
+  // }
 }

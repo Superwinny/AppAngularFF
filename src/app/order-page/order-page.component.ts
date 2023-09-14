@@ -3,6 +3,7 @@ import { APIService } from '../service/api.service';
 import { RecipeInterface, RestoCategoryInterface } from '../data.interface';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { __values } from 'tslib';
+import { OrderServiceService } from '../service/order-service.service';
 
 @Component({
   selector: 'app-order-page',
@@ -15,7 +16,9 @@ recipesCategories!: RestoCategoryInterface[];
 orderForm!: FormGroup;
 
 constructor(
-  private readonly _ApiService : APIService
+  private readonly _ApiService : APIService,
+  private readonly orderservice: OrderServiceService,
+
 ){
 
 }
@@ -61,9 +64,27 @@ console.log((this.orderForm.value));
 
 
 
-actions($event: {type: string; payload: RecipeInterface}){
+async actions($event: {type: string; payload?: any}) {
   console.log($event);
-  this._addRecipeToForm($event.payload.uuid, 1)
+  switch (true) {
+    case $event.type === 'selectCategory':
+      console.log($event.type, $event.payload);
+      break;
+    case $event.type === 'add':
+      this._addRecipeToForm($event.payload.uuid, 1);
+      break;
+    case $event.type === 'remove':
+
+      break;
+    case $event.type === 'send-order':
+       await this.orderservice.saveData(this.orderForm.value);
+      (this.orderForm.get('recipes') as FormArray).clear();
+      console.log(this.orderForm.value);
+      alert('order sucessfuly send!');
+      break;
+    default:
+      break;
+  }
 }
 
 }

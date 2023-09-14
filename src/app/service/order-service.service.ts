@@ -15,7 +15,7 @@ export class OrderServiceService {
 
   }
 
-  async addOrder(data: {title: string}){
+  async saveData(data: {recipe: {recipeId: string; quantity: number}[], dateTime: Date}){
 
     const docRef = doc(this._fireStore, this.databaseName + '/');
     await setDoc(docRef, data)

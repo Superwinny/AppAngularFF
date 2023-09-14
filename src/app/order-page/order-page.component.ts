@@ -30,22 +30,36 @@ constructor(
 }
 
 private _addRecipeToForm(recipeId: string, quantity: number){
-  // Build group element whith RecipeId and Quantity
-  const group = new FormGroup({
-    recipeId: new FormControl("", Validators.compose([
-   Validators.required
- ])),
- quantity: new FormControl('', Validators.compose([
-   Validators.required
- ])),
-});
+
 //get form Array Control to add selected recipe
 const formArray = this.orderForm?.get('recipes') as FormArray;
+
+const index = formArray.value.findIndex(
+(r:{recipeId: string; quantity: number;}) => r.recipeId === recipeId
+);
+if(index >= 0){
+  const quantityControler = formArray.at(index).get('quantity');
+  if(quantityControler){
+    quantityControler.setValue(quantityControler.value + quantity);
+  }
+} else{
+// Build group element whith RecipeId and Quantity
+const group = new FormGroup({
+  recipeId: new FormControl("", Validators.compose([
+ Validators.required
+])),
+quantity: new FormControl('', Validators.compose([
+ Validators.required
+])),
+});
 //add recipe to arra form
 formArray.push(group);
 //display result in console
 console.log((this.orderForm.value));
 }
+}
+
+
 
 actions($event: {type: string; payload: RecipeInterface}){
   console.log($event);

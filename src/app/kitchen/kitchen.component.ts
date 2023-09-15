@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Auth, authState,GoogleAuthProvider, signOut } from '@angular/fire/auth';
+import { Auth, authState,GoogleAuthProvider, signOut, signInWithPopup } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-kitchen',
@@ -19,7 +19,7 @@ async actions(type: string, payload?: any){
   switch(true){
     case type === 'singnin':
     const provider = new GoogleAuthProvider();
-    const result = singnInWithPopup(this._auth, provider);
+    const result = signInWithPopup(this._auth, provider);
     console.log(result);
 
     break;
@@ -34,8 +34,5 @@ async actions(type: string, payload?: any){
   }
 }
 
-}
-function singnInWithPopup(_auth: Auth, provider: GoogleAuthProvider) {
-  throw new Error('Function not implemented.');
 }
 

@@ -1,12 +1,12 @@
 <section *ngIf="user$ |async; else singnoutTemplate">
-  <button (click)="actions('singnout')">  SingOut</button>
+  <button (click)="actions('signout')">SIGNOUT</button>
 
 </section>
 
 
 <ng-template #singnoutTemplate>
   <section>
-    <button (click)="actions('singnin')">SINGIN</button>>
+    <button (click)="actions('signin')">SIGNIN</button>
   </section>
 </ng-template>
 

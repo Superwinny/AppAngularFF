@@ -16,14 +16,15 @@ export class KitchenComponent {
 
 
 async actions(type: string, payload?: any){
+
   switch(true){
-    case type === 'singnin':
+    case type === 'signin':
     const provider = new GoogleAuthProvider();
     const result = signInWithPopup(this._auth, provider);
     console.log(result);
 
     break;
-    case type === 'singnout':
+    case type === 'signout':
     await signOut(this._auth);
     console.log('user out');
 

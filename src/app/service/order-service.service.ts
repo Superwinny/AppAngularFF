@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { setDoc, doc, deleteDoc }from 'firebase/firestore';
+import { setDoc, doc, collection}from 'firebase/firestore';
+import {collectionData, query  }from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -25,4 +26,10 @@ export class OrderServiceService {
   //   const docRef = doc(this._fireStore, this.databaseName + '/');
   //   await deleteDoc(docRef)
   // }
+
+  loadData(){
+    const colRef = collection(this._fireStore, 'recipeorder');
+    const q = query(colRef);
+    return collectionData(q)
+  }
 }

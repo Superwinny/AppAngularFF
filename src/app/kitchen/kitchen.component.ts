@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Auth, authState,GoogleAuthProvider, signOut, signInWithPopup } from '@angular/fire/auth';
-
+import {FirebaseService} from '../services/firebase.service';
+import { Observable, of, switchMap } from 'rxjs';
 @Component({
   selector: 'app-kitchen',
   templateUrl: './kitchen.component.html',
@@ -9,9 +10,20 @@ import { Auth, authState,GoogleAuthProvider, signOut, signInWithPopup } from '@a
 export class KitchenComponent {
 
   user$ = authState(this._auth as any)
+  data$: Observable<any[]> = this.user$.pipe(
+    switchMap((user) => {
+      if(user){
+        return this._firebaseService.loadData();
+      }else{
+        return of();
+      }
+    })
+  );
+
 
   constructor(
     private readonly _auth: Auth,
+    private readonly _firebaseService: FirebaseService
   ){}
 
 

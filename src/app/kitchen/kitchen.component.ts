@@ -37,7 +37,6 @@ async actions(type: string, payload?: any){
     break;
     case type === 'signout':
     await signOut(this._auth);
-    console.log('user out');
 
     break;
 

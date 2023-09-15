@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Auth } from '@angular/fire/auth';
-import { GoogleAuthProvider, signOut } from 'firebase/auth';
+import { Auth, authState,GoogleAuthProvider, signOut } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-kitchen',
@@ -9,6 +8,8 @@ import { GoogleAuthProvider, signOut } from 'firebase/auth';
 })
 export class KitchenComponent {
 
+  user$ = authState(this._auth as any)
+
   constructor(
     private readonly _auth: Auth,
   ){}
@@ -16,14 +17,16 @@ export class KitchenComponent {
 
 async actions(type: string, payload?: any){
   switch(true){
-    case type === 'login':
+    case type === 'singnin':
     const provider = new GoogleAuthProvider();
-    const result = await singnInWithPopup(this._auth, provider);
+    const result = singnInWithPopup(this._auth, provider);
     console.log(result);
 
     break;
-    case type === 'logout':
-    await signOut
+    case type === 'singnout':
+    await signOut(this._auth);
+    console.log('user out');
+
     break;
 
     default:

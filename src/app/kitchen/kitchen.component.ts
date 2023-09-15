@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Auth, authState,GoogleAuthProvider, signOut, signInWithPopup } from '@angular/fire/auth';
-import {FirebaseService} from '../services/firebase.service';
+import {OrderServiceService} from '../service/order-service.service';
 import { Observable, of, switchMap } from 'rxjs';
 @Component({
   selector: 'app-kitchen',
@@ -9,7 +9,7 @@ import { Observable, of, switchMap } from 'rxjs';
 })
 export class KitchenComponent {
 
-  user$ = authState(this._auth as any)
+  user$ = authState(this._auth as any);
   data$: Observable<any[]> = this.user$.pipe(
     switchMap((user) => {
       if(user){
@@ -20,10 +20,9 @@ export class KitchenComponent {
     })
   );
 
-
   constructor(
     private readonly _auth: Auth,
-    private readonly _firebaseService: FirebaseService
+    private readonly _firebaseService: OrderServiceService
   ){}
 
 

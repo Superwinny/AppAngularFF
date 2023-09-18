@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Auth, authState,GoogleAuthProvider, signOut, signInWithPopup } from '@angular/fire/auth';
 import {OrderServiceService} from '../service/order-service.service';
 import { Observable, of, switchMap } from 'rxjs';
+import { APIService } from '../service/api.service';
 @Component({
   selector: 'app-kitchen',
   templateUrl: './kitchen.component.html',
@@ -22,7 +23,8 @@ export class KitchenComponent {
 
   constructor(
     private readonly _auth: Auth,
-    private readonly _firebaseService: OrderServiceService
+    private readonly _firebaseService: OrderServiceService,
+    @Inject('APIService') private readonly _apiService: APIService
   ){}
 
 
@@ -41,8 +43,7 @@ async actions(type: string, payload?: any){
     break;
     case type === 'display-detail':
     console.log(payload);
-
-
+    const apiData = await this._apiService.getRecipes();
     break;
 
     default:

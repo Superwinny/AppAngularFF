@@ -30,6 +30,6 @@ export class OrderServiceService {
   loadData(){
     const colRef = collection(this._fireStore, 'recipeorder');
     const q = query(colRef);
-    return collectionData(q)
+    return collectionData(q, {idField: 'id'})
   }
 }

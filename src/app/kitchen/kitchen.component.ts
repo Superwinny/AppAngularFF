@@ -1,8 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { Auth, authState,GoogleAuthProvider, signOut, signInWithPopup } from '@angular/fire/auth';
-import {OrderServiceService} from '../service/order-service.service';
+import { Auth, authState, GoogleAuthProvider, signOut, signInWithPopup } from '@angular/fire/auth';
+import { OrderServiceService } from '../service/order-service.service';
 import { Observable, of, switchMap } from 'rxjs';
 import { APIService } from '../service/api.service';
+import { RecipeInterface } from '../data.interface';
 @Component({
   selector: 'app-kitchen',
   templateUrl: './kitchen.component.html',
@@ -13,9 +14,9 @@ export class KitchenComponent {
   user$ = authState(this._auth as any);
   data$: Observable<any[]> = this.user$.pipe(
     switchMap((user) => {
-      if(user){
+      if (user) {
         return this._firebaseService.loadData();
-      }else{
+      } else {
         return of();
       }
     })
@@ -24,32 +25,36 @@ export class KitchenComponent {
   constructor(
     private readonly _auth: Auth,
     private readonly _firebaseService: OrderServiceService,
-    @Inject('APIService') private readonly _apiService: APIService
-  ){}
+   private readonly _apiService: APIService
+  ) { }
 
 
-async actions(type: string, payload?: any){
+  async actions(type: string, payload?: any) {
 
-  switch(true){
-    case type === 'signin':
-    const provider = new GoogleAuthProvider();
-    const result = signInWithPopup(this._auth, provider);
-    console.log(result);
+    switch (true) {
+      case type === 'signin':
+        const provider = new GoogleAuthProvider();
+        const result = signInWithPopup(this._auth, provider);
+        console.log(result);
 
-    break;
-    case type === 'signout':
-    await signOut(this._auth);
+        break;
+      case type === 'signout':
+        await signOut(this._auth);
 
-    break;
-    case type === 'display-detail':
-    console.log(payload);
-    const apiData = await this._apiService.getRecipes();
-    break;
-
-    default:
-    break;
+        break;
+      case type === 'display-detail':
+        console.log(payload);
+        const order = payload as { recipes: { recipeId: string }[] }
+        const orderDetail = await Promise.all(order.recipes.map(async ({ recipeId }) => {
+          const recipe = await this._apiService.getRecipeById(recipeId);
+          return recipe;
+        }));
+        console.log('>>', orderDetail);
+        break;
+      default:
+        break;
+    }
   }
-}
 
 }
 

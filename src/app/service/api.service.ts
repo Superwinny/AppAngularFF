@@ -22,5 +22,14 @@ export class APIService {
     return response.data;
   }
 
+  async getRecipeById(recipeId: string) {
+    const apiData = await this.getRecipes();
+    const categorie = apiData.find(
+      ({recipes}) => recipes.find(recipe => recipe.uuid === recipeId)
+    );
+    const recipe = categorie?.recipes.find(recipe => recipe.uuid === recipeId);
+    return recipe;
+  }
+
   sendOrder(){}
 }

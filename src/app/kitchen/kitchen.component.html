@@ -9,4 +9,12 @@
     <button (click)="actions('signin')">SIGNIN</button>
   </section>
 </ng-template>
-
+<ul>
+  <li *ngFor="let order of data$|async"
+  (click)="actions('display-detail', order)">
+    {{order.id}}
+  </li>
+</ul>
+<!-- <pre>
+  {{data$|async|json}}
+</pre> -->

@@ -39,6 +39,11 @@ async actions(type: string, payload?: any){
     await signOut(this._auth);
 
     break;
+    case type === 'display-detail':
+    console.log(payload);
+
+
+    break;
 
     default:
     break;

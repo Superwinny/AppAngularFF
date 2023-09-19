@@ -93,13 +93,9 @@ export class OrderPageComponent implements OnInit {
         break;
       case $event.type === 'add':
         const loading = await this._showLoading();
-
         this._addRecipeToForm($event.payload.uuid, 1);
-
         await loading.dismiss();
-
         this.presentToast('bottom');
-
         break;
       case $event.type === 'remove':
 

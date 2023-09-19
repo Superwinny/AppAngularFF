@@ -4,7 +4,7 @@ import { RecipeInterface, RestoCategoryInterface } from '../data.interface';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { __values } from 'tslib';
 import { OrderServiceService } from '../service/order-service.service';
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-order-page',
@@ -20,6 +20,7 @@ export class OrderPageComponent implements OnInit {
     private readonly _ApiService: APIService,
     private readonly orderservice: OrderServiceService,
     private readonly _toastController: ToastController,
+    private readonly _loadingCtrl: LoadingController
 
   ) {
 
@@ -43,7 +44,14 @@ export class OrderPageComponent implements OnInit {
 
     await toast.present();
   }
-
+ private async _showLoading() {
+    const loading = await this._loadingCtrl.create({
+      message: '...',
+      duration: 500,
+    });
+     loading.present();
+     return loading;
+  }
   private _addRecipeToForm(recipeId: string, quantity: number) {
 
     //get form Array Control to add selected recipe
@@ -84,8 +92,14 @@ export class OrderPageComponent implements OnInit {
         console.log($event.type, $event.payload);
         break;
       case $event.type === 'add':
+        const loading = await this._showLoading();
+
         this._addRecipeToForm($event.payload.uuid, 1);
+
+        await loading.dismiss();
+
         this.presentToast('bottom');
+
         break;
       case $event.type === 'remove':
 

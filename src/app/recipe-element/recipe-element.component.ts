@@ -19,8 +19,9 @@ export class RecipeElementComponent {
   async presentToast(position:'bottom') {
     const toast = await this._toastController.create({
       message: 'Plat rajouté',
-      duration: 1500,
+      duration: 1000,
       position: position,
+      color:"success"
     });
 
     await toast.present();

@@ -4,6 +4,7 @@ import { RecipeInterface, RestoCategoryInterface } from '../data.interface';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { __values } from 'tslib';
 import { OrderServiceService } from '../service/order-service.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-order-page',
@@ -18,6 +19,7 @@ export class OrderPageComponent implements OnInit {
   constructor(
     private readonly _ApiService: APIService,
     private readonly orderservice: OrderServiceService,
+    private readonly _toastController: ToastController,
 
   ) {
 
@@ -30,6 +32,16 @@ export class OrderPageComponent implements OnInit {
       dateTime: new FormControl(new Date)
     });
 
+  }
+  async presentToast(position:'bottom') {
+    const toast = await this._toastController.create({
+      message: 'Plat rajouté',
+      duration: 1000,
+      position: position,
+      color:"success"
+    });
+
+    await toast.present();
   }
 
   private _addRecipeToForm(recipeId: string, quantity: number) {
@@ -73,6 +85,7 @@ export class OrderPageComponent implements OnInit {
         break;
       case $event.type === 'add':
         this._addRecipeToForm($event.payload.uuid, 1);
+        this.presentToast('bottom');
         break;
       case $event.type === 'remove':
 

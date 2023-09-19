@@ -11,21 +11,6 @@ type actionType = 'add'|'remove';
 })
 export class RecipeElementComponent {
 
-
-  constructor(
-    private readonly _toastController: ToastController
-    ) {}
-
-  async presentToast(position:'bottom') {
-    const toast = await this._toastController.create({
-      message: 'Plat rajouté',
-      duration: 1000,
-      position: position,
-      color:"success"
-    });
-
-    await toast.present();
-  }
 @Input() recipe!: RecipeInterface;
 @Output() recipeEvent: EventEmitter<{
   type: actionType;

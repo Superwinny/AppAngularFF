@@ -1,9 +1,13 @@
-<div (click)="actions('add', recipe)">
+<div (click)="actions('add', recipe)" (click)="presentToast('bottom')">
+  <ion-toast
+  message="Plat rajouté"
+  [duration]="3000"
+>
+  </ion-toast>
   <ion-avatar >
   <img src="{{recipe.imageUrl}}">
 </ion-avatar>
 <h3>{{recipe.title}}</h3>
-<p>{{recipe.description}}</p>
 <p>{{recipe.price}}</p>
 </div>
 

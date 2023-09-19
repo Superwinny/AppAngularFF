@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { KitchenComponent } from './kitchen/kitchen.component';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { KitchenComponent } from './kitchen/kitchen.component';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    IonicModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

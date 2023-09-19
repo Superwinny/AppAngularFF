@@ -4,9 +4,11 @@
       <ion-col size="3">
         <section>
           <ion-list>
-            <ion-item *ngFor="let category of recipesCategories" (click)="actions({
-                            type: 'selectCategory', payload: category
-                        })">
+            <ion-item
+            *ngFor="let category of recipesCategories"
+            (click)="actions({
+            type: 'selectCategory', payload: category
+              })">
                 <ion-text class="ion-padding-start">
                      {{category.title}}
                 </ion-text>

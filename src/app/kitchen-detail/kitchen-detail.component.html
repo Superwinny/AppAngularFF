@@ -1,1 +1,20 @@
-<p>kitchen-detail works!</p>
+<h1>HELLO CUISTO</h1>
+
+
+
+<ion-content>
+  <ion-grid>
+    <ion-row *ngFor="let recipe of order">
+      <ion-col *ngIf="recipe">
+        <ion-card>
+          <ion-img [src]="recipe.imageUrl"></ion-img>
+          <ion-card-content>
+            <ion-card-title>
+              {{recipe.title}}
+            </ion-card-title>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

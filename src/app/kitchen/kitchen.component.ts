@@ -4,6 +4,8 @@ import { OrderServiceService } from '../service/order-service.service';
 import { Observable, of, switchMap } from 'rxjs';
 import { APIService } from '../service/api.service';
 import { RecipeInterface } from '../data.interface';
+import { ModalController } from '@ionic/angular';
+import { KitchenDetailComponent } from '../kitchen-detail/kitchen-detail.component';
 @Component({
   selector: 'app-kitchen',
   templateUrl: './kitchen.component.html',
@@ -25,10 +27,21 @@ export class KitchenComponent {
   constructor(
     private readonly _auth: Auth,
     private readonly _firebaseService: OrderServiceService,
-   private readonly _apiService: APIService
+   private readonly _apiService: APIService,
+   private readonly _modalCtrl: ModalController,
   ) { }
 
 
+   private async _openModal(order: (RecipeInterface & {quantity:number})[]) {
+    const modal = await this._modalCtrl.create({
+      component: KitchenDetailComponent,
+      componentProps: {
+        order
+      }
+    });
+    modal.present();
+
+  }
   async actions(type: string, payload?: any) {
 
     switch (true) {
@@ -53,6 +66,7 @@ export class KitchenComponent {
             }  as RecipeInterface & {quantity: Number}
         }));
         console.log('>>', orderDetail);
+        await this._openModal(orderDetail)
         break;
       default:
         break;

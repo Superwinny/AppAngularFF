@@ -7,5 +7,5 @@ import { RecipeInterface } from '../data.interface';
   styleUrls: ['./kitchen-detail.component.scss']
 })
 export class KitchenDetailComponent {
-  @Input() order!: (RecipeInterface | undefined);
+  @Input() order!: (RecipeInterface & {quantity: number})[];
 }

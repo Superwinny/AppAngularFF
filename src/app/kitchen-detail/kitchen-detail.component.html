@@ -1,4 +1,4 @@
-<h1>HELLO CUISTO</h1>
+
 <ion-content>
   <ion-grid>
     <ion-row>
@@ -7,12 +7,12 @@
           <ion-item *ngFor="let recipe of order">
             <ion-avatar slot="start">
               <img [src]="recipe.imageUrl" />
-              <ion-label>
-                {{recipe.title}}
-                <ion-note slot="end">0x
-                </ion-note>
-              </ion-label>
             </ion-avatar>
+            <ion-label class="ion-padding-start">
+              {{recipe.title}}
+            </ion-label>
+            <ion-note slot="end">{{recipe.quantity}}X
+            </ion-note>
           </ion-item>
         </ion-list>
       </ion-col>

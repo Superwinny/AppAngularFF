@@ -63,7 +63,7 @@ export class KitchenComponent {
           return {
             ...recipe,
             quantity
-            }  as RecipeInterface & {quantity: Number}
+            }  as RecipeInterface & {quantity: number}
         }));
         console.log('>>', orderDetail);
         await this._openModal(orderDetail)

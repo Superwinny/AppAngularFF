@@ -30,12 +30,12 @@
         </ion-row>
 
       </ion-grid>
-      </ion-col>
+      <button (click)="actions({
+            type: 'send-order'
+             })">Send Order</button>
+    </ion-col>
+   </ion-row>
 
 
-     <button (click)="actions({
-           type: 'send-order'
-            })">Send Order</button>
-    </ion-row>
   </ion-grid>
 </ion-content>

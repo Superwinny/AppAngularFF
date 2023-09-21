@@ -12,13 +12,15 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { KitchenComponent } from './kitchen/kitchen.component';
 import { IonicModule } from '@ionic/angular';
+import { KitchenDetailComponent } from './kitchen-detail/kitchen-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrderPageComponent,
     RecipeElementComponent,
-    KitchenComponent
+    KitchenComponent,
+    KitchenDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -13,7 +13,7 @@
             <ion-col size="12">
                 <ion-list>
                     <ion-item
-                        *ngFor="let order of datas$|async"
+                        *ngFor="let order of data$|async"
                         (click)="actions('display-detail', order)"
                         [detail]="true"
                         [button]="true">

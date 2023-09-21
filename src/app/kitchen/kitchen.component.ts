@@ -44,10 +44,13 @@ export class KitchenComponent {
         break;
       case type === 'display-detail':
         console.log(payload);
-        const order = payload as { recipes: { recipeId: string }[] }
-        const orderDetail = await Promise.all(order.recipes.map(async ({ recipeId }) => {
+        const order = payload as { recipes: { recipeId: string, quantity: number }[] }
+        const orderDetail = await Promise.all(order.recipes.map(async ({ recipeId, quantity }) => {
           const recipe = await this._apiService.getRecipeById(recipeId);
-          return recipe;
+          return {
+            ...recipe,
+            quantity
+            }  as RecipeInterface & {quantity: Number}
         }));
         console.log('>>', orderDetail);
         break;

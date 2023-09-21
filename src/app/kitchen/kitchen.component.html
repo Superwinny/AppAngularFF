@@ -1,26 +1,41 @@
-<ion-content>
-  <section *ngIf="user$ |async; else singnoutTemplate">
-    <button (click)="actions('signout')">SIGNOUT</button>
-
-  </section>
-
-
-  <ng-template #singnoutTemplate>
-    <ion-grid>
-      <ion-row class="ion-justify-content-center ion-align-items-center">
-        <ion-col size="auto">
-          <ion-button (click)="actions('signin')">SIGNIN</ion-button>
-
-        </ion-col>
-      </ion-row>
+<ion-header *ngIf="user$|async;">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="end">
+            <ion-button fill="clear" (click)="actions('signout')">
+                <ion-icon name="log-out-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-no-padding">
+    <ion-grid *ngIf="user$|async; else signoutTemplate" class="ion-no-padding">
+        <ion-row>
+            <ion-col size="12">
+                <ion-list>
+                    <ion-item
+                        *ngFor="let order of datas$|async"
+                        (click)="actions('display-detail', order)"
+                        [detail]="true"
+                        [button]="true">
+                        <ion-label class="ion-padding-start">
+                            {{order.id}}
+                        </ion-label>
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
     </ion-grid>
-    <section>
-    </section>
-  </ng-template>
-  <ul>
-    <li *ngFor="let order of data$|async" (click)="actions('display-detail', order)">
-      {{order.id}}
-    </li>
-  </ul>
-
+    <ng-template #signoutTemplate>
+        <ion-grid>
+            <ion-row class="ion-justify-content-center ion-align-items-center">
+                <ion-col size="auto">
+                    <ion-button (click)="actions('signin')">
+                        signin with Google
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ng-template>
 </ion-content>
+
+

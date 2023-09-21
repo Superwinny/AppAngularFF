@@ -1,18 +1,26 @@
-<section *ngIf="user$ |async; else singnoutTemplate">
-  <button (click)="actions('signout')">SIGNOUT</button>
+<ion-content>
+  <section *ngIf="user$ |async; else singnoutTemplate">
+    <button (click)="actions('signout')">SIGNOUT</button>
 
-</section>
-
-
-<ng-template #singnoutTemplate>
-  <section>
-    <button (click)="actions('signin')">SIGNIN</button>
   </section>
-</ng-template>
-<ul>
-  <li *ngFor="let order of data$|async"
-  (click)="actions('display-detail', order)">
-    {{order.id}}
-  </li>
-</ul>
 
+
+  <ng-template #singnoutTemplate>
+    <ion-grid>
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-col size="auto">
+          <ion-button (click)="actions('signin')">SIGNIN</ion-button>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <section>
+    </section>
+  </ng-template>
+  <ul>
+    <li *ngFor="let order of data$|async" (click)="actions('display-detail', order)">
+      {{order.id}}
+    </li>
+  </ul>
+
+</ion-content>
